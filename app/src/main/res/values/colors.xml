@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_500">#FF6200EE</color>  <!-- Material Design Purple 500 -->
+    <!-- Add other colors if needed, e.g., -->
+    <color name="holo_blue_dark">#FF0099CC</color>
+    <color name="holo_green_dark">#FF669900</color>
+    <color name="holo_orange_dark">#FFFF8800</color>
+</resources>

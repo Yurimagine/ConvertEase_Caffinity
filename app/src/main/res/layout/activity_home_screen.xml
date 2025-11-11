@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Logout Button in Upper Left Corner -->
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:backgroundTint="#D32F2F"
+        android:textColor="#FFFFFF"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"/>
+
+    <!-- Main Content - Centered -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:padding="16dp">
+
+        <!-- Welcome Message -->
+        <TextView
+            android:id="@+id/textViewWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome!"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#1976D2"
+            android:layout_gravity="center"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Length Button -->
+        <Button
+            android:id="@+id/btnLength"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Length Conversion"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Weight Button -->
+        <Button
+            android:id="@+id/btnWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Weight Conversion"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Temperature Button -->
+        <Button
+            android:id="@+id/btnTemperature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Temperature Conversion"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Volume Button -->
+        <Button
+            android:id="@+id/btnVolume"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Volume Conversion"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Currency Button -->
+        <Button
+            android:id="@+id/btnCurrency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Currency Conversion"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

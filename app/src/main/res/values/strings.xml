@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Unit Converter</string>
+    <string name="hint_enter_value">Enter value</string>
+    <string name="btn_convert">Convert</string>
+    <string name="result_placeholder">Result will appear here</string>
+    <string name="title_converter">📏 Unit Converter</string>
+</resources>
