@@ -2,16 +2,15 @@ package com.example.unitconversion;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
+import android.util.TypedValue;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.unitconversion.currency.ApiService;
 import com.example.unitconversion.currency.AllRatesResponse;
 import com.example.unitconversion.utils.SharedPrefHelper;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.OkHttpClient;
@@ -23,7 +22,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CurrencyActivity extends AppCompatActivity {
 
-    private static final String TAG = "CurrencyActivity";
     private static final String API_KEY = "1769a63e03-92a2864ab8-t5jz1g";
 
     private EditText inputValue;
@@ -46,6 +44,7 @@ public class CurrencyActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ThemeManager.applyTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_currency);
 
@@ -62,20 +61,25 @@ public class CurrencyActivity extends AppCompatActivity {
 
         prefHelper = new SharedPrefHelper(this);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, currencies);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item, currencies);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerFrom.setAdapter(adapter);
         spinnerTo.setAdapter(adapter);
 
         apiService = buildRetrofit().create(ApiService.class);
 
-        // Load cached rates or fetch new
         loadCachedRates();
 
         btnConvert.setOnClickListener(v -> convertCurrency());
         btnReturn.setOnClickListener(v -> finish());
         btnShare.setOnClickListener(v -> shareResult());
         btnRefresh.setOnClickListener(v -> fetchAllRates(safeGetSelectedBase()));
+
+        applyButtonTheme(btnConvert);
+        applyButtonTheme(btnReturn);
+        applyButtonTheme(btnShare);
+        applyButtonTheme(btnRefresh);
     }
 
     private Retrofit buildRetrofit() {
@@ -87,13 +91,20 @@ public class CurrencyActivity extends AppCompatActivity {
                 .build();
     }
 
+    private void applyButtonTheme(Button button) {
+        TypedValue typedValue = new TypedValue();
+        getTheme().resolveAttribute(android.R.attr.colorPrimary, typedValue, true);
+        int primaryColor = typedValue.data;
+        button.setBackgroundColor((primaryColor & 0x00FFFFFF) | 0x99000000);
+        button.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+    }
+
     private String safeGetSelectedBase() {
         try {
             return spinnerFrom.getSelectedItem().toString();
         } catch (Exception e) {
-            Log.w(TAG, "Fallback to USD", e);
+            return "USD";
         }
-        return "USD";
     }
 
     private void loadCachedRates() {
@@ -110,20 +121,19 @@ public class CurrencyActivity extends AppCompatActivity {
     }
 
     private void fetchAllRates(String base) {
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(android.view.View.VISIBLE);
         btnConvert.setEnabled(false);
 
         Call<AllRatesResponse> call = apiService.getAllRates(API_KEY, base);
         call.enqueue(new Callback<AllRatesResponse>() {
             @Override
             public void onResponse(Call<AllRatesResponse> call, Response<AllRatesResponse> response) {
-                progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(android.view.View.GONE);
                 if (response.isSuccessful() && response.body() != null && response.body().results != null) {
                     Map<String, Double> rates = response.body().results;
                     prefHelper.cacheRates(base, rates);
                     btnConvert.setEnabled(true);
                     tvLastUpdated.setText("Rates updated just now");
-                    Toast.makeText(CurrencyActivity.this, "Rates updated", Toast.LENGTH_SHORT).show();
                 } else {
                     handleOffline();
                 }
@@ -131,7 +141,7 @@ public class CurrencyActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<AllRatesResponse> call, Throwable t) {
-                progressBar.setVisibility(View.GONE);
+                progressBar.setVisibility(android.view.View.GONE);
                 handleOffline();
             }
         });
@@ -160,23 +170,36 @@ public class CurrencyActivity extends AppCompatActivity {
         }
 
         double amount;
-        try { amount = Double.parseDouble(inputText); }
-        catch (NumberFormatException e) {
+        try {
+            amount = Double.parseDouble(inputText);
+        } catch (NumberFormatException e) {
             Toast.makeText(this, "Invalid number", Toast.LENGTH_SHORT).show();
             return;
         }
 
         String from = safeGetSelectedBase();
         String to = spinnerTo.getSelectedItem().toString();
-
         Map<String, Double> rates = prefHelper.readCachedRates(from);
+
         if (rates != null && rates.containsKey(to)) {
             double rate = rates.get(to);
             double result = amount * rate;
-            answer.setText(String.format("%.2f %s = %.2f %s", amount, from, result, to));
-            answer.animate().scaleX(1.1f).scaleY(1.1f).setDuration(200).withEndAction(() -> {
-                answer.animate().scaleX(1f).scaleY(1f).setDuration(200).start();
-            }).start();
+
+            String resultText = String.format("%.2f %s = %.2f %s", amount, from, result, to);
+            answer.setText(resultText);
+
+            // Animate the answer TextView
+            answer.animate().scaleX(1.1f).scaleY(1.1f).setDuration(200)
+                    .withEndAction(() -> answer.animate().scaleX(1f).scaleY(1f).setDuration(200).start())
+                    .start();
+
+            // Use readable date for history
+            String date = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault())
+                    .format(new java.util.Date());
+
+            HistoryManager history = new HistoryManager(this);
+            history.addHistory("Currency", amount + " " + from, String.format("%.2f %s", result, to), date);
+
         } else {
             Toast.makeText(this, "Rates not available. Please refresh.", Toast.LENGTH_SHORT).show();
         }

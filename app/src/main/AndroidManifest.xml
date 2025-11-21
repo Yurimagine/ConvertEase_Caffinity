@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.unitconversion">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,36 +14,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UnitConversion">
 
-        <!-- Login Activity - This is now the launcher activity -->
-        <activity
-            android:name=".login"
-            android:exported="true">
+        <!-- Login Activity - Launcher -->
+        <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- Register Activity -->
-        <activity
-            android:name=".Register"
-            android:exported="false" />
 
-        <!-- Main Activity (Home Screen) -->
+        <!-- History Activity -->
         <activity
-            android:name=".MainActivity"
+            android:name=".History"
             android:exported="false" />
 
         <!-- Conversion Activities -->
-        <activity android:name=".LengthActivity"
+        <activity
+            android:name=".LengthActivity"
             android:exported="false" />
-        <activity android:name=".WeightActivity"
+        <activity
+            android:name=".WeightActivity"
             android:exported="false" />
-        <activity android:name=".TemperatureActivity"
+        <activity
+            android:name=".TemperatureActivity"
             android:exported="false" />
-        <activity android:name=".VolumeActivity"
+        <activity
+            android:name=".VolumeActivity"
             android:exported="false" />
-        <activity android:name=".CurrencyActivity"
+        <activity
+            android:name=".CurrencyActivity"
             android:exported="false" />
 
     </application>

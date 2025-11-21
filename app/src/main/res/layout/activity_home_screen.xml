@@ -1,81 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="?attr/colorBackground">
 
-    <!-- Logout Button in Upper Left Corner -->
-    <Button
-        android:id="@+id/buttonLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:backgroundTint="#D32F2F"
-        android:textColor="#FFFFFF"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"/>
-
-    <!-- Main Content - Centered -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_centerInParent="true"
-        android:padding="16dp">
+        android:gravity="center_horizontal">
 
-        <!-- Welcome Message -->
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ConvertEase"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            android:textColor="?attr/colorPrimary"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Welcome message -->
         <TextView
             android:id="@+id/textViewWelcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome!"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#1976D2"
-            android:layout_gravity="center"
+            android:text="Welcome, User!"
+            android:textSize="18sp"
+            android:textColor="?attr/colorOnBackground"
             android:layout_marginBottom="24dp"/>
 
-        <!-- Length Button -->
-        <Button
-            android:id="@+id/btnLength"
+        <!-- First row of buttons -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Length Conversion"
-            android:layout_marginBottom="12dp"/>
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginBottom="16dp">
 
-        <!-- Weight Button -->
-        <Button
-            android:id="@+id/btnWeight"
+            <Button
+                android:id="@+id/btnLength"
+                style="@style/ConversionButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="60dp"
+                android:text="Length Conversion"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/btnWeight"
+                style="@style/ConversionButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="60dp"
+                android:text="Weight Conversion"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+        <!-- Second row of buttons -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Weight Conversion"
-            android:layout_marginBottom="12dp"/>
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginBottom="16dp">
 
-        <!-- Temperature Button -->
-        <Button
-            android:id="@+id/btnTemperature"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Temperature Conversion"
-            android:layout_marginBottom="12dp"/>
+            <Button
+                android:id="@+id/btnTemperature"
+                style="@style/ConversionButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="60dp"
+                android:text="Temperature Conversion"
+                android:layout_marginEnd="8dp"/>
 
-        <!-- Volume Button -->
-        <Button
-            android:id="@+id/btnVolume"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Volume Conversion"
-            android:layout_marginBottom="12dp"/>
+            <Button
+                android:id="@+id/btnVolume"
+                style="@style/ConversionButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="60dp"
+                android:text="Volume Conversion"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
 
-        <!-- Currency Button -->
+        <!-- Single buttons -->
         <Button
             android:id="@+id/btnCurrency"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/ConversionButton"
             android:text="Currency Conversion"/>
 
+        <Button
+            android:id="@+id/btnHistory"
+            style="@style/ConversionButton"
+            android:text="View History"/>
+
+        <Button
+            android:id="@+id/buttonLogout"
+            style="@style/ConversionButton"
+            android:text="Logout"/>
+
+        <Button
+            android:id="@+id/btnThemes"
+            style="@style/ConversionButton"
+            android:text="Themes"/>
     </LinearLayout>
 
-</RelativeLayout>
+</ScrollView>

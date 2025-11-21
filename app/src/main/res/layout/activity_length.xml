@@ -6,9 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    android:background="@android:color/background_light"
+    android:background="?attr/colorBackground"
     tools:context=".MainActivity">
-
 
     <TextView
         android:id="@+id/title"
@@ -17,12 +16,11 @@
         android:text="📏 Length Converter"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
+        android:textColor="?attr/colorPrimary"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="30dp"/>
-
 
     <LinearLayout
         android:id="@+id/inputRow"
@@ -44,6 +42,7 @@
             android:inputType="numberDecimal"
             android:background="@drawable/bg_input"
             android:padding="12dp"
+            android:textColor="?attr/colorOnBackground"
             android:textSize="16sp"/>
 
         <Spinner
@@ -56,7 +55,6 @@
             android:padding="8dp"/>
     </LinearLayout>
 
-
     <Spinner
         android:id="@+id/spinnerTo"
         android:layout_width="0dp"
@@ -68,14 +66,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-
     <TextView
         android:id="@+id/answer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="Result will appear here"
-        android:textColor="@android:color/holo_green_dark"
+        android:textColor="?attr/colorPrimary"
         android:textSize="16sp"
         android:gravity="center"
         android:background="@drawable/bg_result"
@@ -93,8 +90,8 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@android:color/holo_purple"
-        android:textColor="@android:color/white"
+        android:backgroundTint="?attr/colorPrimary"
+        android:textColor="?attr/colorOnPrimary"
         app:layout_constraintTop_toBottomOf="@id/answer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -108,8 +105,8 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:textColor="@android:color/white"
+        android:backgroundTint="?attr/colorSecondary"
+        android:textColor="?attr/colorOnSecondary"
         app:layout_constraintTop_toBottomOf="@id/btnConvert"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -123,8 +120,8 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@android:color/holo_orange_dark"
-        android:textColor="@android:color/white"
+        android:backgroundTint="?attr/colorSecondaryVariant"
+        android:textColor="?attr/colorOnSecondary"
         app:layout_constraintTop_toBottomOf="@id/btnReturn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
